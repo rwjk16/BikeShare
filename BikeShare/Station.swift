@@ -7,28 +7,35 @@
 //
 
 import Foundation
-
-
-@objcMembers public class Json: Codable {
-
-        var last_updated : Date
-
-        var data: DataClass
-    
-}
+import MapKit
 
 @objcMembers public class DataClass: Codable {
     var stations : [Station]?
 }
 
-//@objc enum RentalMethod: String, Codable {
-//    case creditcard = "CREDITCARD"
-//    case key = "KEY"
-//    case phone = "PHONE"
-//    case transitcard = "TRANSITCARD"
-//}
+@objcMembers public class Station: NSObject, MKAnnotation, Codable {
+    public var coordinate: CLLocationCoordinate2D {
+        get {
+            return CLLocationCoordinate2DMake(lat, lon)
+        }
+    }
+    public var title: String? {
+        get {
+            let nameArray = name.split(separator: "/").first
+             guard  let firstName = nameArray?.first  else{
+                return nil
+            }
+            return String(firstName)
+        }
+    }
+    public var subtitle: String?{
+        get {
+            return address
+            }
 
-@objcMembers public class Station: Codable {
+        }
+
+
     var station_id : String = ""
     var name: String = ""
     var lat: Double = 0.0
@@ -37,6 +44,4 @@ import Foundation
     var capacity: Int = 0
     var rental_methods: [String] = []
     var obcn: String = ""
-    
-
 }
