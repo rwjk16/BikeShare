@@ -18,8 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let bounds = UIScreen.main.bounds
     self.window = UIWindow(frame: bounds)
-    let rootviewController = MainMenuViewController()
-    self.window?.rootViewController = rootviewController
+    let mainController = MainMenuViewController()
+    let navigationController = UINavigationController(rootViewController: mainController)
+    navigationController.navigationBar.isTranslucent = false
+    self.window?.rootViewController = navigationController
     self.window?.makeKeyAndVisible()
     
     return true

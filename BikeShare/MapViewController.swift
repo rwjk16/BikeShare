@@ -45,7 +45,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     refreshButton.addTarget(self, action: #selector(refreshButtonPressed), for: .touchUpInside)
-
+    favoritesButton.addTarget(self, action: #selector(showFavorites), for: .touchUpInside)
+    
     view.addSubview(mapView)
     self.view.insertSubview(refreshButton, aboveSubview: self.mapView)
     self.view.insertSubview(favoritesButton, aboveSubview: self.mapView)
@@ -61,6 +62,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     mapView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
     // Do any additional setup after loading the view.
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    
+    self.navigationController?.navigationBar.isHidden = true
   }
   
   override func didReceiveMemoryWarning() {
@@ -90,6 +97,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
   
   @objc func refreshButtonPressed() {
     print("button smashed")
+  }
+  
+  @objc func showFavorites(){
+    let favoritesView = FavoritesViewController()
+    self.navigationController?.pushViewController(favoritesView, animated: true)
   }
 
   
