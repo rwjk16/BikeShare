@@ -61,8 +61,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     mapView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
     // Do any additional setup after loading the view.
+
+    // next line to test the manager
+    let manager = StationManager()
+   
+
+    manager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil) { (LOL) in
+
+    }
+//    manager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil, completion: handler)
+    //End manager test
   }
-  
+
+
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
