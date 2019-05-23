@@ -25,6 +25,7 @@
 		E9FAFE43229734690073F508 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FAFE3F229734690073F508 /* Station.swift */; };
 		E9FAFE44229734690073F508 /* StationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FAFE41229734690073F508 /* StationManager.swift */; };
 		E9FAFE46229734AC0073F508 /* RefreshButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FAFE45229734AC0073F508 /* RefreshButton.swift */; };
+		E9FAFE4822973F1B0073F508 /* PricePlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FAFE4722973F1B0073F508 /* PricePlan.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		E9FAFE40229734690073F508 /* BikeShare-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BikeShare-Bridging-Header.h"; sourceTree = "<group>"; };
 		E9FAFE41229734690073F508 /* StationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationManager.swift; sourceTree = "<group>"; };
 		E9FAFE45229734AC0073F508 /* RefreshButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshButton.swift; sourceTree = "<group>"; };
+		E9FAFE4722973F1B0073F508 /* PricePlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricePlan.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				E9FAFE3E229734690073F508 /* Json.swift */,
 				E9FAFE3F229734690073F508 /* Station.swift */,
 				E9FAFE41229734690073F508 /* StationManager.swift */,
+				E9FAFE4722973F1B0073F508 /* PricePlan.swift */,
 				D2E470EE229583EC00752B98 /* Main.storyboard */,
 				D2E470F1229583ED00752B98 /* Assets.xcassets */,
 				D22009A22295FDF100E893A0 /* Button.swift */,
@@ -258,6 +261,7 @@
 				D22009A32295FDF100E893A0 /* Button.swift in Sources */,
 				E9FAFE44229734690073F508 /* StationManager.swift in Sources */,
 				E9FAFE43229734690073F508 /* Station.swift in Sources */,
+				E9FAFE4822973F1B0073F508 /* PricePlan.swift in Sources */,
 				E9FAFE46229734AC0073F508 /* RefreshButton.swift in Sources */,
 				D2E470EB229583EC00752B98 /* AppDelegate.swift in Sources */,
 				E9CFEA6822961A4400547F1C /* PlansViewController.swift in Sources */,

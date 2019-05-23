@@ -45,20 +45,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     // next line to test the manager
     let manager = StationManager()
-    manager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil) { (LOL) in
+    manager.fetchBikeStation(userLocation: currentLocation.coordinate) { LOL in
     }
     //End manager test
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
-    self.navigationController?.navigationBar.isHidden = true
+    navigationController?.navigationBar.isHidden = true
   }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
+
   
   //MARK: Buttons
   
