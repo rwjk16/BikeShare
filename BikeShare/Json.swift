@@ -12,15 +12,15 @@ import Foundation
 
     var last_updated : Date
     var data: DataClass
-
-    public class func create(from url: URL) -> Json {
-        let decoder = JSONDecoder()
-        let item = try! decoder.decode(Json.self, from: try! Data(contentsOf: url))
-        return item
-    }
-
-    required init(coder decoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//
+//    public class func create(from url: URL) -> Json {
+//        let decoder = JSONDecoder()
+//        let item = try! decoder.decode(Json.self, from: try! Data(contentsOf: url))
+//        return item
+//    }
+//
+//    required init(coder decoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
 
 }
