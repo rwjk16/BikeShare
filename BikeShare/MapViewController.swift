@@ -20,11 +20,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
   let backButton: Button = Button()
   
   let mapView: MKMapView = {
-      let mapView = MKMapView()
-      mapView.mapType = MKMapType.standard
-      mapView.isZoomEnabled = true
-      mapView.isScrollEnabled = true
-      return mapView
+    let mapView = MKMapView()
+    mapView.mapType = MKMapType.standard
+    mapView.isZoomEnabled = true
+    mapView.isScrollEnabled = true
+    return mapView
   }()
   
   override func viewDidLoad() {
@@ -35,23 +35,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     constrainMapView()
     setupButtonImages()
+    
     positionRefreshButton()
     positionFavoritesButton()
     positionDockToggleButton()
     positionBackButton()
-
-    // Do any additional setup after loading the view.
-
+    
+    print(refreshButton.frame)
+    
     // next line to test the manager
     let manager = StationManager()
     manager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil) { (LOL) in
-
     }
-
     //End manager test
   }
-
-
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    self.navigationController?.navigationBar.isHidden = true
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -117,13 +120,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     print("button smashed")
   }
   
-//  @objc func update() {
-//    progressHUD.dismiss()
-//  }
   
   @objc func favoritesButtonPressed() {
-    //TODO: handle favorites
-    print("button smashed")
+    let favoritesView = FavoritesViewController()
+    self.navigationController?.pushViewController(favoritesView, animated: true)
   }
   
   @objc func dockToggleButtonPressed() {
@@ -132,9 +132,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
   }
   
   @objc func backButtonPressed() {
-    self.dismiss(animated: true, completion: nil)
+    self.navigationController?.popViewController(animated: true)
   }
-
   
   //MARK: Setup Region & constrain mapview
   
@@ -156,7 +155,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     let region: MKCoordinateRegion = MKCoordinateRegion(center: self.currentLocation.coordinate, span: span)
     self.mapView.setRegion(region, animated: true)
   }
-
   
   //MARK: CLLocationDelegate Methods
   
@@ -168,8 +166,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     setupRegion()
     //fetch bikes w/ location
     //append to array of bike locations
-    
   }
 }
+
 
 
