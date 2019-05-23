@@ -13,10 +13,6 @@ class StationManager: NSObject {
 
     @objc func fetchBikeStation(userLocation location: CLLocationCoordinate2D, searchTerm: String?, completion: @escaping ([MKAnnotation]?) -> ()) {
 
-
-
-
-
         guard let bikeStationURL =  URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_information") else {
             print("Error in the bikeStationURL")
             return
@@ -64,17 +60,6 @@ class StationManager: NSObject {
                     arrayStations.append(station)
 
                 }
-
-
-                //                guard let json: Dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String : Any] else { return}
-                //
-                //                guard let jsonArray = json[“businesses”] as? [[String : Any]] else {return}
-                //
-                //                var cafes = [Cafe]()
-                //                for item in jsonArray {
-                //                    guard let cafe = Cafe(json: item) else {return}
-                //                    cafes.append(cafe)
-              //  print(arrayStations)
 
                 for i in arrayStations {
                     print(i.name)

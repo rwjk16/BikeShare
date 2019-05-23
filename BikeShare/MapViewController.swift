@@ -64,12 +64,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     // next line to test the manager
     let manager = StationManager()
-   
-
     manager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil) { (LOL) in
 
     }
-//    manager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil, completion: handler)
+
     //End manager test
   }
 
