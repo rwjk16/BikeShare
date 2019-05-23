@@ -1,16 +1,16 @@
 PODS:
-  - SVProgressHUD (2.2.5)
+  - UICircularProgressRing (6.1.0)
 
 DEPENDENCIES:
-  - SVProgressHUD
+  - UICircularProgressRing
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - SVProgressHUD
+    - UICircularProgressRing
 
 SPEC CHECKSUMS:
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  UICircularProgressRing: b3eba859a515e4d9d38503eec913f09c28450785
 
-PODFILE CHECKSUM: 1515c2c7f0d1133a33c0a33d385be1b17e1f4485
+PODFILE CHECKSUM: eaa25dc3b656f18f1713c3aa21e7daf5b1a8d15b
 
 COCOAPODS: 1.7.0
