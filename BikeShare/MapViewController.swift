@@ -14,9 +14,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
   let locationManager: CLLocationManager = CLLocationManager()
   var currentLocation: CLLocation = CLLocation()
   
-  let refreshButton: Button = Button()
+  let refreshButton: RefreshButton = RefreshButton()
   let favoritesButton: Button = Button()
   let dockToggle: Button = Button()
+  let backButton: Button = Button()
   
   let mapView: MKMapView = {
       let mapView = MKMapView()
@@ -32,34 +33,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     self.locationManager.requestWhenInUseAuthorization()
     self.locationManager.startUpdatingLocation()
     
-    if let image = UIImage(named: "refresh") {
-      refreshButton.setImage(image, for: .normal)
-    }
-    
-    if let image = UIImage(named: "favorites") {
-      favoritesButton.setImage(image, for: .normal)
-    }
-    
-    if let image = UIImage(named: "dockToggle") {
-      dockToggle.setImage(image, for: .normal)
-    }
-    
-    refreshButton.addTarget(self, action: #selector(refreshButtonPressed), for: .touchUpInside)
-
-    view.addSubview(mapView)
-    self.view.insertSubview(refreshButton, aboveSubview: self.mapView)
-    self.view.insertSubview(favoritesButton, aboveSubview: self.mapView)
-    self.view.insertSubview(dockToggle, aboveSubview: self.mapView)
-
+    constrainMapView()
+    setupButtonImages()
     positionRefreshButton()
     positionFavoritesButton()
     positionDockToggleButton()
-    mapView.center = self.view.center
-    mapView.translatesAutoresizingMaskIntoConstraints = false
-    mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-    mapView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-    mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-    mapView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+    positionBackButton()
+
     // Do any additional setup after loading the view.
 
     // next line to test the manager
@@ -97,12 +77,77 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     dockToggle.center = CGPoint(x: x, y: y)
   }
   
+  func positionBackButton() {
+    let x = self.view.frame.maxX * 0.10
+    let y = self.view.frame.maxY * 0.10
+    backButton.center = CGPoint(x: x, y: y)
+  }
+  
+  func setupButtonImages() {
+    
+    self.view.insertSubview(refreshButton, aboveSubview: self.mapView)
+    self.view.insertSubview(favoritesButton, aboveSubview: self.mapView)
+    self.view.insertSubview(dockToggle, aboveSubview: self.mapView)
+    self.view.insertSubview(backButton, aboveSubview: self.mapView)
+    
+    if let image = UIImage(named: "refresh") {
+      refreshButton.setImage(image, for: .normal)
+    }
+    refreshButton.addTarget(self, action: #selector(refreshButtonPressed), for: .touchUpInside)
+    
+    if let image = UIImage(named: "favorites") {
+      favoritesButton.setImage(image, for: .normal)
+    }
+    favoritesButton.addTarget(self, action: #selector(favoritesButtonPressed), for: .touchUpInside)
+    
+    if let image = UIImage(named: "dockToggle") {
+      dockToggle.setImage(image, for: .normal)
+    }
+    dockToggle.addTarget(self, action: #selector(dockToggleButtonPressed), for: .touchUpInside)
+    
+    if let image = UIImage(named: "back") {
+      backButton.setImage(image, for: .normal)
+    }
+    backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+  }
+  
   @objc func refreshButtonPressed() {
+    //TODO: handle refresh
+    refreshButton.rotateImageThenShowLoading()
     print("button smashed")
+  }
+  
+//  @objc func update() {
+//    progressHUD.dismiss()
+//  }
+  
+  @objc func favoritesButtonPressed() {
+    //TODO: handle favorites
+    print("button smashed")
+  }
+  
+  @objc func dockToggleButtonPressed() {
+    //TODO: annotation/view switch from bike to dock
+    print("button smashed")
+  }
+  
+  @objc func backButtonPressed() {
+    self.dismiss(animated: true, completion: nil)
   }
 
   
-  //MARK: Setup Region
+  //MARK: Setup Region & constrain mapview
+  
+  func constrainMapView() {
+    view.addSubview(mapView)
+    mapView.center = self.view.center
+    mapView.translatesAutoresizingMaskIntoConstraints = false
+    mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+    mapView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+    mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+    mapView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+  }
+  
   let lat = 0.01
   let lng = 0.01
   

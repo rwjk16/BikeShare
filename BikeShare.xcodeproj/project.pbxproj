@@ -16,6 +16,10 @@
 		5FD99230DBB71DCB187583CE /* Pods_BikeShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D474C286C9B27B3344193DB0 /* Pods_BikeShare.framework */; };
 		D220099B2295C85600E893A0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D220099A2295C85600E893A0 /* MapKit.framework */; };
 		D22009A32295FDF100E893A0 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22009A22295FDF100E893A0 /* Button.swift */; };
+		D22009CD2296F37100E893A0 /* PlansCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22009CC2296F37100E893A0 /* PlansCell.swift */; };
+		D22009CF2296F39A00E893A0 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22009CE2296F39A00E893A0 /* MainMenuViewController.swift */; };
+		D22009D12296F3A100E893A0 /* PlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22009D02296F3A100E893A0 /* PlansViewController.swift */; };
+		D22009D52297181A00E893A0 /* RefreshButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22009D42297181A00E893A0 /* RefreshButton.swift */; };
 		D2E470EB229583EC00752B98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E470EA229583EC00752B98 /* AppDelegate.swift */; };
 		D2E470ED229583EC00752B98 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E470EC229583EC00752B98 /* MapViewController.swift */; };
 		D2E470F0229583EC00752B98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2E470EE229583EC00752B98 /* Main.storyboard */; };
@@ -35,6 +39,10 @@
 		9DB00C229512AFC08FDF122A /* Pods-BikeShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BikeShare.release.xcconfig"; path = "Target Support Files/Pods-BikeShare/Pods-BikeShare.release.xcconfig"; sourceTree = "<group>"; };
 		D220099A2295C85600E893A0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D22009A22295FDF100E893A0 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		D22009CC2296F37100E893A0 /* PlansCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlansCell.swift; sourceTree = "<group>"; };
+		D22009CE2296F39A00E893A0 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		D22009D02296F3A100E893A0 /* PlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlansViewController.swift; sourceTree = "<group>"; };
+		D22009D42297181A00E893A0 /* RefreshButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshButton.swift; sourceTree = "<group>"; };
 		D2E470E7229583EC00752B98 /* BikeShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E470EA229583EC00752B98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2E470EC229583EC00752B98 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +106,9 @@
 			isa = PBXGroup;
 			children = (
 				D2E470EA229583EC00752B98 /* AppDelegate.swift */,
+				D22009CE2296F39A00E893A0 /* MainMenuViewController.swift */,
 				D2E470EC229583EC00752B98 /* MapViewController.swift */,
+<<<<<<< HEAD
 				25BCF6D9229707010049340F /* BikeShare-Bridging-Header.h */,
 				25BCF6DB229707010049340F /* Json.swift */,
 				25BCF6D7229707000049340F /* MainMenuViewController.swift */,
@@ -106,6 +116,11 @@
 				25BCF6D6229707000049340F /* PlansViewController.swift */,
 				25BCF6D8229707010049340F /* Station.swift */,
 				25BCF6E1229708170049340F /* StationManager.swift */,
+=======
+				D22009D42297181A00E893A0 /* RefreshButton.swift */,
+				D22009CC2296F37100E893A0 /* PlansCell.swift */,
+				D22009D02296F3A100E893A0 /* PlansViewController.swift */,
+>>>>>>> refreshButton
 				D2E470EE229583EC00752B98 /* Main.storyboard */,
 				D2E470F1229583ED00752B98 /* Assets.xcassets */,
 				D22009A22295FDF100E893A0 /* Button.swift */,
@@ -236,15 +251,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				25BCF6DF229707010049340F /* PlansCell.swift in Sources */,
 				D2E470ED229583EC00752B98 /* MapViewController.swift in Sources */,
 				25BCF6DD229707010049340F /* MainMenuViewController.swift in Sources */,
 				25BCF6DC229707010049340F /* PlansViewController.swift in Sources */,
 				25BCF6E2229708170049340F /* StationManager.swift in Sources */,
+=======
+				D22009CF2296F39A00E893A0 /* MainMenuViewController.swift in Sources */,
+				D22009D52297181A00E893A0 /* RefreshButton.swift in Sources */,
+				D22009CD2296F37100E893A0 /* PlansCell.swift in Sources */,
+				D2E470ED229583EC00752B98 /* MapViewController.swift in Sources */,
+				D22009D12296F3A100E893A0 /* PlansViewController.swift in Sources */,
+>>>>>>> refreshButton
 				D22009A32295FDF100E893A0 /* Button.swift in Sources */,
 				25BCF6DE229707010049340F /* Station.swift in Sources */,
 				D2E470EB229583EC00752B98 /* AppDelegate.swift in Sources */,
+<<<<<<< HEAD
 				25BCF6E0229707010049340F /* Json.swift in Sources */,
+=======
+>>>>>>> refreshButton
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
