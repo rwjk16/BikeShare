@@ -76,6 +76,7 @@ class StationManager: NSObject {
     task.resume()
 }
 
+ 
     @objc func fetchStationStatus( completion: @escaping ([StationStatus]?) -> ()) {
 
         guard let bikeStationURL =  URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_information") else {
