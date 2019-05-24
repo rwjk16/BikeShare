@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Welcome
 
- public class JsonStatus: Codable {
+@objc public class JsonStatus: NSObject, Codable {
     public var lastUpdated : Int
     public var data: DataInfo?
 
@@ -26,7 +26,7 @@ import Foundation
 }
 
 // MARK: - DataInfo
- public class DataInfo:  Codable {
+@objcMembers public class DataInfo: NSObject, Codable {
     public var stationStatus: [StationStatus]
     enum CodingKeys: String, CodingKey {
         case stationStatus = "stations"
@@ -38,7 +38,7 @@ import Foundation
 }
 
 // MARK: - StationStatus
- public class StationStatus: Codable {
+@objcMembers public class StationStatus:NSObject, Codable {
     public var stationID: String = ""
     public var numBikesAvailable: Int = 0
     public var numBikesDisabled: Int  = 0

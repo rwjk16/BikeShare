@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25298B772298936100E4C3B3 /* StationDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25298B762298936100E4C3B3 /* StationDao.swift */; };
 		256378B122985BE1005E52A8 /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AB22985BE1005E52A8 /* FavoritesCell.swift */; };
 		256378B222985BE1005E52A8 /* FavoritesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AC22985BE1005E52A8 /* FavoritesDetailController.swift */; };
 		256378B322985BE1005E52A8 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AD22985BE1005E52A8 /* FavoritesViewController.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		25298B762298936100E4C3B3 /* StationDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDao.swift; sourceTree = "<group>"; };
 		256378AB22985BE1005E52A8 /* FavoritesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
 		256378AC22985BE1005E52A8 /* FavoritesDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDetailController.swift; sourceTree = "<group>"; };
 		256378AD22985BE1005E52A8 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				25BCF6DA229707010049340F /* PlansCell.swift */,
 				25BCF6D6229707000049340F /* PlansViewController.swift */,
 				25BCF6D8229707010049340F /* Station.swift */,
+				25298B762298936100E4C3B3 /* StationDao.swift */,
 				25BCF6E5229739510049340F /* StationStatus.swift */,
 				25BCF6E1229708170049340F /* StationManager.swift */,
 				D2E470EE229583EC00752B98 /* Main.storyboard */,
@@ -265,6 +268,7 @@
 				256378B322985BE1005E52A8 /* FavoritesViewController.swift in Sources */,
 				256378B522985BE1005E52A8 /* PricePlan.swift in Sources */,
 				25BCF6DF229707010049340F /* PlansCell.swift in Sources */,
+				25298B772298936100E4C3B3 /* StationDao.swift in Sources */,
 				D2E470ED229583EC00752B98 /* MapViewController.swift in Sources */,
 				25BCF6E6229739510049340F /* StationStatus.swift in Sources */,
 				25BCF6DD229707010049340F /* MainMenuViewController.swift in Sources */,

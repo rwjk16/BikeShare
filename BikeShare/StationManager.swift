@@ -8,11 +8,10 @@
 
 import Foundation
 import MapKit
-import Realm
-class StationManager: {
+class StationManager: NSObject {
 
 
-  func fetchBikeStation(userLocation location: CLLocationCoordinate2D, searchTerm: String?, completion: @escaping ([MKAnnotation]?) -> ()) {
+    @objc func fetchBikeStation(userLocation location: CLLocationCoordinate2D, searchTerm: String?, completion: @escaping ([MKAnnotation]?) -> ()) {
 
         guard let bikeStationURL =  URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_information") else {
             print("Error in the bikeStationURL")

@@ -12,18 +12,18 @@ import MapKit
 
 
 
- public class Json:  Codable {
-
+@objc public class Json: NSObject, Codable {
     var last_updated : Date
     var data: DataClass
 
 }
 
- public class DataClass: Codable {
+@objcMembers public class DataClass: Codable {
+
   var stations : [Station]?
 }
 
-public class Station:  MKAnnotation, Codable {
+@objcMembers public class Station: NSObject, MKAnnotation, Codable {
   public var coordinate: CLLocationCoordinate2D {
         get {
             return CLLocationCoordinate2DMake(lat, lon)
