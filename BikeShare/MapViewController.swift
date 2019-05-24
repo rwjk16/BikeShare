@@ -171,6 +171,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //fetch bikes w/ location
     //append to array of bike locations
   }
+  
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
+  {
+    if !(annotation is MKPointAnnotation) {
+      return nil
+    }
+    
+    let annotationIdentifier = "AnnotationIdentifier"
+    var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
+    
+    if annotationView == nil {
+      annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+      annotationView!.canShowCallout = true
+    }
+    else {
+      annotationView!.annotation = annotation
+    }
+    
+    let pinImage = UIImage(named: "infoPin")
+    annotationView!.image = pinImage
+    annotationView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * 0.07, height: self.view.frame.size.width * 0.07)
+    return annotationView
+  }
 }
 
 
