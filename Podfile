@@ -6,7 +6,7 @@ target 'BikeShare' do
   use_frameworks!
 
 pod 'UICircularProgressRing'
-
+pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
   # Pods for BikeShare
 
 end

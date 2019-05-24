@@ -9,14 +9,14 @@
 import Foundation
 import MapKit
 class StationManager: NSObject {
+  
+  @objc func fetchBikeStation(userLocation location: CLLocationCoordinate2D, searchTerm: String? = nil, completion: @escaping ([MKAnnotation]?) -> ()) {
+    
+    guard let bikeStationURL =  URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_information") else {
+      print("Error in the bikeStationURL")
+      return
+    }
 
-
-    @objc func fetchBikeStation(userLocation location: CLLocationCoordinate2D, searchTerm: String?, completion: @escaping ([MKAnnotation]?) -> ()) {
-
-        guard let bikeStationURL =  URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_information") else {
-            print("Error in the bikeStationURL")
-            return
-        }
         var request: URLRequest = URLRequest(url: bikeStationURL)
         request.httpMethod = "GET"
 
@@ -213,5 +213,5 @@ class StationManager: NSObject {
         }
         task.resume()
     }
+    }
 
-}
