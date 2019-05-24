@@ -14,8 +14,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
   var stations = [MKAnnotation]()
   let locationManager: CLLocationManager = CLLocationManager()
   var currentLocation: CLLocation = CLLocation()
-  var stations : [MKAnnotation] = []
-  
+//  var stations : [MKAnnotation] = []
+
   let refreshButton: RefreshButton = RefreshButton()
   let favoritesButton: Button = Button()
   let dockToggle: Button = Button()
@@ -46,7 +46,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     print(refreshButton.frame)
     
     let manager = StationManager()
-    manager.fetchBikeStation(userLocation: currentLocation.coordinate) { stations in
+    manager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil) { stations in
       guard let stations = stations else {return}
       print(stations)
       

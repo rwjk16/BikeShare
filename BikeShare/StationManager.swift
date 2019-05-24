@@ -151,4 +151,73 @@ class StationManager: NSObject {
         task.resume()
     }
 
+    func fetchPricePlan(completion: @escaping ([Plan]) -> ()) {
+        struct DataResponse: Decodable
+        {
+            let data:PlanResponse
+        }
+
+        struct PlanResponse: Decodable{
+            let plans:[Plan]
+        }
+
+        guard let bikePricePlan =  URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/system_pricing_plans") else {return}
+
+        var request: URLRequest = URLRequest(url: bikePricePlan)
+        request.httpMethod = "GET"
+
+        let session: URLSession = URLSession.shared
+        let task: URLSessionDataTask = session.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("\(error)")
+                DispatchQueue.main.async {
+                    completion([])
+                }
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                DispatchQueue.main.async {
+                    completion([])
+                }
+                return
+            }
+
+            let statusCode: Int = httpResponse.statusCode
+
+            if statusCode != 200 {
+                print("Error: status code is equal to \(statusCode)")
+                DispatchQueue.main.async {
+                    completion([])
+                }
+                return
+            }
+
+            guard let data = data else {
+                print("Error data is nil")
+                DispatchQueue.main.async {
+                    completion([])
+                }
+                return
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                let dataResponse = try decoder.decode(DataResponse.self, from: data)
+                let plansResponse = dataResponse.data
+                let plans = plansResponse.plans
+                print(plans)
+
+                DispatchQueue.main.async {
+                    completion(plans)
+                }
+
+            }
+            catch let err {
+                print("Error is\(err)")
+            }
+        }
+        task.resume()
+    }
+
 }

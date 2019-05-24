@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		256378B122985BE1005E52A8 /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AB22985BE1005E52A8 /* FavoritesCell.swift */; };
+		256378B222985BE1005E52A8 /* FavoritesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AC22985BE1005E52A8 /* FavoritesDetailController.swift */; };
+		256378B322985BE1005E52A8 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AD22985BE1005E52A8 /* FavoritesViewController.swift */; };
+		256378B422985BE1005E52A8 /* InfoBike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AE22985BE1005E52A8 /* InfoBike.swift */; };
+		256378B522985BE1005E52A8 /* PricePlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AF22985BE1005E52A8 /* PricePlan.swift */; };
+		256378B622985BE1005E52A8 /* RefreshButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378B022985BE1005E52A8 /* RefreshButton.swift */; };
 		25BCF6DC229707010049340F /* PlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCF6D6229707000049340F /* PlansViewController.swift */; };
 		25BCF6DD229707010049340F /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCF6D7229707000049340F /* MainMenuViewController.swift */; };
 		25BCF6DE229707010049340F /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCF6D8229707010049340F /* Station.swift */; };
@@ -25,6 +31,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		256378AB22985BE1005E52A8 /* FavoritesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
+		256378AC22985BE1005E52A8 /* FavoritesDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDetailController.swift; sourceTree = "<group>"; };
+		256378AD22985BE1005E52A8 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		256378AE22985BE1005E52A8 /* InfoBike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoBike.swift; sourceTree = "<group>"; };
+		256378AF22985BE1005E52A8 /* PricePlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PricePlan.swift; sourceTree = "<group>"; };
+		256378B022985BE1005E52A8 /* RefreshButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshButton.swift; sourceTree = "<group>"; };
 		25BCF6D6229707000049340F /* PlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlansViewController.swift; sourceTree = "<group>"; };
 		25BCF6D7229707000049340F /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		25BCF6D8229707010049340F /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
@@ -104,6 +116,12 @@
 				25BCF6D9229707010049340F /* BikeShare-Bridging-Header.h */,
 				25BCF6DB229707010049340F /* Json.swift_ */,
 				25BCF6D7229707000049340F /* MainMenuViewController.swift */,
+				256378AB22985BE1005E52A8 /* FavoritesCell.swift */,
+				256378AC22985BE1005E52A8 /* FavoritesDetailController.swift */,
+				256378AD22985BE1005E52A8 /* FavoritesViewController.swift */,
+				256378AE22985BE1005E52A8 /* InfoBike.swift */,
+				256378AF22985BE1005E52A8 /* PricePlan.swift */,
+				256378B022985BE1005E52A8 /* RefreshButton.swift */,
 				25BCF6DA229707010049340F /* PlansCell.swift */,
 				25BCF6D6229707000049340F /* PlansViewController.swift */,
 				25BCF6D8229707010049340F /* Station.swift */,
@@ -239,16 +257,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				256378B422985BE1005E52A8 /* InfoBike.swift in Sources */,
+				256378B322985BE1005E52A8 /* FavoritesViewController.swift in Sources */,
+				256378B522985BE1005E52A8 /* PricePlan.swift in Sources */,
 				25BCF6DF229707010049340F /* PlansCell.swift in Sources */,
 				D2E470ED229583EC00752B98 /* MapViewController.swift in Sources */,
 				25BCF6E6229739510049340F /* StationStatus.swift in Sources */,
 				25BCF6DD229707010049340F /* MainMenuViewController.swift in Sources */,
+				256378B222985BE1005E52A8 /* FavoritesDetailController.swift in Sources */,
 				25BCF6DC229707010049340F /* PlansViewController.swift in Sources */,
+				256378B622985BE1005E52A8 /* RefreshButton.swift in Sources */,
 				25BCF6E2229708170049340F /* StationManager.swift in Sources */,
 				D22009A32295FDF100E893A0 /* Button.swift in Sources */,
 				25BCF6DE229707010049340F /* Station.swift in Sources */,
 				D2E470EB229583EC00752B98 /* AppDelegate.swift in Sources */,
 				25BCF6E0229707010049340F /* Json.swift_ in Sources */,
+				256378B122985BE1005E52A8 /* FavoritesCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
