@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import RealmSwift
 
 
 
@@ -23,7 +24,7 @@ import MapKit
   var stations : [Station]?
 }
 
-@objcMembers public class Station: NSObject, MKAnnotation, Codable {
+@objcMembers public class Station: Object, MKAnnotation, Codable {
   public var coordinate: CLLocationCoordinate2D {
         get {
             return CLLocationCoordinate2DMake(lat, lon)
@@ -46,13 +47,13 @@ import MapKit
 
         }
 
-    var status : StationStatus? 
-    var station_id : String = ""
-    var name: String = ""
-    var lat: Double = 0.0
-    var lon: Double = 0.0
-    var address: String = ""
-    var capacity: Int = 0
-    var rental_methods: [String] = []
-    var obcn: String = ""
+    @objc dynamic var status : StationStatus?
+    @objc dynamic var station_id : String = ""
+    @objc dynamic var name: String = ""
+    @objc dynamic var lat: Double = 0.0
+    @objc dynamic var lon: Double = 0.0
+    @objc dynamic var address: String = ""
+    @objc dynamic var capacity: Int = 0
+    @objc dynamic var rental_methods: [String] = []
+    @objc dynamic var obcn: String = ""
 }
