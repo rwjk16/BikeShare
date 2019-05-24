@@ -58,6 +58,7 @@ import RealmSwift
         case isChargingStation = "is_charging_station"
         case status = "status"
     }
+
 //
 //    convenience public init(stationID: String,
 //                numBikesAvailable: Int,

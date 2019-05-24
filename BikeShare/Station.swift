@@ -56,4 +56,9 @@ import RealmSwift
     @objc dynamic var capacity: Int = 0
     @objc dynamic var rental_methods: [String] = []
     @objc dynamic var obcn: String = ""
+
+    override public static func primaryKey() -> String? {
+        return "station_id"
+    }
+
 }
