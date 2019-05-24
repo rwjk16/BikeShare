@@ -72,19 +72,25 @@ class StationManager: NSObject {
             catch let err {
                 print("Error is\(err)")
             }
+        }
+        task.resume()
     }
-    task.resume()
-}
 
- 
-    @objc func fetchStationStatus( completion: @escaping ([StationStatus]?) -> ()) {
 
-        guard let bikeStationURL =  URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_information") else {
-            print("Error in the bikeStationURL")
+    func fetchStationStatus( stations:  [Station] , completion: @escaping ([Station]?) -> ()) {
+
+        guard let stationStatusURL =  URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_status") else {
+            print("Error in the stationStatusURL - \(self)  - \(#function)")
             return
         }
-        var request: URLRequest = URLRequest(url: bikeStationURL)
+        var request: URLRequest = URLRequest(url: stationStatusURL)
         request.httpMethod = "GET"
+
+        //create a dictionary to search a station by id
+        var dicOfStations: Dictionary<String, Station> = Dictionary<String,Station> ()
+        for station  in stations {
+            dicOfStations[station.station_id] = station
+        }
 
         let session: URLSession = URLSession.shared
         let task: URLSessionDataTask = session.dataTask(with: request) { (data, response, error) in
@@ -105,7 +111,7 @@ class StationManager: NSObject {
             }
 
             guard let data = data else {
-                print("Error data is nil")
+                print("Error data is nil \(self) -  \(#function)")
                 return
             }
 
@@ -113,25 +119,28 @@ class StationManager: NSObject {
 
 
                 let decoderJSON = JSONDecoder()
-                let info = try decoderJSON.decode(Json.self, from: data)
-                let data = info.data
-                let stations = data.stations
+                let info = try decoderJSON.decode(JsonStatus.self, from: data)
+                let dataInfo = info.data
 
-                var arrayStations: [Station] = []
 
-                guard let s = stations else {
+                guard let stationStatusArray: [StationStatus] = dataInfo?.stationStatus else {
                     return
                 }
-                for station in  s {
-                    arrayStations.append(station)
+                var newStations = [Station]()
+                for status in stationStatusArray {
+                    if let station: Station = dicOfStations[status.stationID]  {
+
+                        station.status = status
+                        newStations.append(station)
+
+                    } else {
+                        print("erro in unwrapping station -statioid: \(status.stationID) - class: \(self) - function: \(#function)")
+                    }
 
                 }
-
-                for i in arrayStations {
-                    print(i.name)
-                }
+                print(newStations)
                 DispatchQueue.main.async {
-//                    completion(StationStatus)
+                    completion(newStations)
                 }
 
             }

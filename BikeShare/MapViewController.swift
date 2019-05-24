@@ -62,31 +62,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     mapView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
     // Do any additional setup after loading the view.
 
-    // next line to test the manager
-    let manager = StationManager()
-    manager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil) { (LOL) in
-
-    }
-    //testing the StatusManager Class
-    testClassStationStatus()
-    //End manager test
+    
   }
 
-
-    func testClassStationStatus() {
-        let url = URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_status")
-        let decoderJSON = JSONDecoder()
-        let JSON = try! decoderJSON.decode(JsonStatus.self, from: Data(contentsOf: url!))
-        let dataInfo = JSON.data
-        guard let stationStatus: [StationStatus] = dataInfo?.stationStatus else {
-            return
-        }
-
-        for status in stationStatus {
-            print (status.status)
-        }
-
-    }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()

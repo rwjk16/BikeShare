@@ -46,7 +46,7 @@ import MapKit
 
         }
 
-
+    var status : StationStatus? 
     var station_id : String = ""
     var name: String = ""
     var lat: Double = 0.0
