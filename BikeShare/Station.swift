@@ -9,6 +9,16 @@
 import Foundation
 import MapKit
 
+
+
+
+@objc public class Json: NSObject, Codable {
+
+    var last_updated : Date
+    var data: DataClass
+
+}
+
 @objcMembers public class DataClass: Codable {
   var stations : [Station]?
 }
@@ -36,7 +46,7 @@ import MapKit
 
         }
 
-
+    var status : StationStatus? 
     var station_id : String = ""
     var name: String = ""
     var lat: Double = 0.0

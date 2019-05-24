@@ -10,31 +10,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--Test View Controller-->
         <scene sceneID="8GC-ib-SnW">
             <objects>
-                <viewController id="F0X-bR-uN5" customClass="MapViewController" customModule="BikeShare" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F0X-bR-uN5" customClass="TestViewController" customModule="BikeShare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bn8-Xe-Wo3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="91m-e2-Zfp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </mapView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="91m-e2-Zfp" firstAttribute="trailing" secondItem="0T9-1a-7dG" secondAttribute="trailing" id="Fqv-bm-oIt"/>
-                            <constraint firstAttribute="bottom" secondItem="91m-e2-Zfp" secondAttribute="bottom" id="JOL-te-iXR"/>
-                            <constraint firstItem="91m-e2-Zfp" firstAttribute="top" secondItem="Bn8-Xe-Wo3" secondAttribute="top" id="Wha-Ld-6Ng"/>
-                            <constraint firstItem="91m-e2-Zfp" firstAttribute="leading" secondItem="0T9-1a-7dG" secondAttribute="leading" id="nw2-FN-CNn"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="0T9-1a-7dG"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iRK-Dz-S5A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="779.71014492753625" y="31.473214285714285"/>
+            <point key="canvasLocation" x="214" y="-150"/>
         </scene>
     </scenes>
 </document>
