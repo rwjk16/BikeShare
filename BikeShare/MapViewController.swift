@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
   
   var stations = [MKAnnotation]()
   let locationManager: CLLocationManager = CLLocationManager()
@@ -34,6 +34,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     self.locationManager.delegate = self
     self.locationManager.requestWhenInUseAuthorization()
     self.locationManager.startUpdatingLocation()
+    self.mapView.delegate = self
     
     constrainMapView()
     setupButtonImages()
@@ -174,7 +175,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
   
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
   {
-    if !(annotation is MKPointAnnotation) {
+    if (annotation is MKUserLocation) {
       return nil
     }
     
