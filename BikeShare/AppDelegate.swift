@@ -7,18 +7,38 @@
 //
 
 import UIKit
+import MapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-
+    var stations : [MKAnnotation] = [Station]()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     let bounds = UIScreen.main.bounds
     self.window = UIWindow(frame: bounds)
     let mainController = MainMenuViewController()
+
+    //Getting the stations
+    let hasData = false
+    if !hasData {
+
+
+        let manager : StationManager = StationManager()
+        manager.fetchBikeStation(userLocation: CLLocationCoordinate2DMake(0, 0), searchTerm: nil) { (stations) in
+
+            manager.fetchStationStatus(stations: stations as! [Station], completion: { (completedStations) in
+                if let stations = completedStations {
+                    mainController.stations = stations
+                }
+            })
+        }
+    } else {
+        //read from database
+    }
+
     let navigationController = UINavigationController(rootViewController: mainController)
     navigationController.navigationBar.isTranslucent = false
     self.window?.rootViewController = navigationController
