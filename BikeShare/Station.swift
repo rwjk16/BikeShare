@@ -10,11 +10,11 @@ import Foundation
 import MapKit
 
 @objcMembers public class DataClass: Codable {
-    var stations : [Station]?
+  var stations : [Station]?
 }
 
 @objcMembers public class Station: NSObject, MKAnnotation, Codable {
-    public var coordinate: CLLocationCoordinate2D {
+  public var coordinate: CLLocationCoordinate2D {
         get {
             return CLLocationCoordinate2DMake(lat, lon)
         }

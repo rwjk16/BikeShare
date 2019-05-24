@@ -13,6 +13,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
   
   let locationManager: CLLocationManager = CLLocationManager()
   var currentLocation: CLLocation = CLLocation()
+  var stations : [MKAnnotation] = []
   
   let refreshButton: RefreshButton = RefreshButton()
   let favoritesButton: Button = Button()
@@ -45,20 +46,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     // next line to test the manager
     let manager = StationManager()
-    manager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil) { (LOL) in
+    manager.fetchBikeStation(userLocation: currentLocation.coordinate) { stations in
+      guard let stations = stations else {return}
+      print(stations)
+      
+      self.stations = stations
+      self.mapView.addAnnotations(self.stations)
+      self.mapView.showAnnotations(self.stations, animated: true)
     }
     //End manager test
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
-    self.navigationController?.navigationBar.isHidden = true
+    navigationController?.navigationBar.isHidden = true
   }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
+
   
   //MARK: Buttons
   
@@ -164,6 +167,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     self.mapView.showsUserLocation = true
     setupRegion()
+    
+    
     //fetch bikes w/ location
     //append to array of bike locations
   }
