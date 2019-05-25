@@ -13,6 +13,7 @@ import SVProgressHUD
 
 class MapViewController: UIViewController, CLLocationManagerDelegate{
   
+  var favoriteStations = [MKAnnotation]()
   var stations = [MKAnnotation]()
   let locationManager: CLLocationManager = CLLocationManager()
   var currentLocation: CLLocation = CLLocation()
@@ -63,6 +64,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
       self.stations = stations
       self.mapView.addAnnotations(self.stations)
       self.mapView.showAnnotations(self.stations, animated: true)
+      self.locationManager.stopUpdatingLocation()
     }
   }
   
@@ -148,11 +150,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   @objc func refreshButtonPressed() {
     //TODO: handle refresh
     refreshButton.rotateImageThenShowLoading()
+    self.locationManager.startUpdatingLocation()
+    Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
+      self.locationManager.stopUpdatingLocation()
+    }
     print("button smashed")
   }
   
   @objc func favoritesButtonPressed() {
     let favoritesView = FavoritesViewController()
+    favoritesView.favoriteStations = self.favoriteStations as! [Station]
     self.navigationController?.pushViewController(favoritesView, animated: true)
   }
   
@@ -203,6 +210,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     
     Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (nil) in
       SVProgressHUD.dismiss()
+      
+      
+      for station in self.stations {
+        
+        for (i, favoritedStation) in self.favoriteStations.enumerated() {
+          if favoritedStation.title == self.stationDetailView.stationNameLabel.text {
+            self.favoriteStations.remove(at: i)
+            return
+          }
+        }
+        
+        if let title = station.title {
+          if title == self.stationDetailView.stationNameLabel.text {
+            self.favoriteStations.append(station)
+            return
+          }
+        }
+      }
     }
   }
 }
@@ -210,21 +235,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   extension MapViewController:MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
       
-      let bikesText = NSMutableAttributedString(string: "1", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
-      bikesText.append(NSAttributedString(string: "\nBikes", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
-      
-      let docksText = NSMutableAttributedString(string: "2", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
-      docksText.append(NSAttributedString(string: "\nDocks", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
-      
-      if view.annotation is MKUserLocation{
-        return
-      }
-      
       if let annotation = view.annotation as? Station{
+        let bikesText = NSMutableAttributedString(string: "1", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
+        
+        bikesText.append(NSAttributedString(string: "\nBikes", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
+        
+        
+        let docksText = NSMutableAttributedString(string: "2", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
+        docksText.append(NSAttributedString(string: "\nDocks", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
+        
+        if view.annotation is MKUserLocation{
+          return
+        }
+        
+        
         self.stationDetailView.numOfBikesLabel.attributedText = bikesText
         self.stationDetailView.numOfDocksLabel.attributedText = docksText
         self.stationDetailView.stationNameLabel.text = annotation.name
       }
+      
+
+
       
       UIView.transition(with: stationDetailView, duration: 0.3, options: .transitionCrossDissolve, animations: {
         self.stationDetailView.isHidden = false
