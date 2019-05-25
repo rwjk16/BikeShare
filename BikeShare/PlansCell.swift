@@ -60,8 +60,8 @@ class PlansCell: UITableViewCell {
   let planImageView : UIImageView = {
     let iv = UIImageView()
     iv.contentMode = .scaleAspectFit
-    iv.clipsToBounds = true
-    iv.layer.cornerRadius = 30
+//    iv.clipsToBounds = true
+//    iv.layer.cornerRadius = 30
     iv.translatesAutoresizingMaskIntoConstraints = false
     return iv
   }()
