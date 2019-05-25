@@ -149,7 +149,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   
   @objc func refreshButtonPressed() {
     //TODO: handle refresh
-    refreshButton.rotateImageThenShowLoading()
+    refreshButton.rotateImage()
     self.locationManager.startUpdatingLocation()
     Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
       self.locationManager.stopUpdatingLocation()
