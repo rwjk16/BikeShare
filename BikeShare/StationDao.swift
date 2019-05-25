@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 
 
+
 class StationDao: NSObject {
     private var database: Realm
     static let sharedInstance = StationDao()
@@ -21,6 +22,9 @@ class StationDao: NSObject {
         update(station: station)
     }
 
+//    func addAll(stations: [Station]){
+//        database.add(stations)
+//    }
     func update(station: Station) {
         do {
             try database.write {
@@ -48,6 +52,7 @@ class StationDao: NSObject {
         }
         return stations;
     }
+
 
     func isEmpty() -> Bool {
         return database.isEmpty

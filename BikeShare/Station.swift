@@ -24,7 +24,7 @@ import RealmSwift
   var stations : [Station]?
 }
 
-@objcMembers public class Station: Object, MKAnnotation, Codable {
+@objcMembers public class Station: Object, Codable {
   public var coordinate: CLLocationCoordinate2D {
         get {
             return CLLocationCoordinate2DMake(lat, lon)
@@ -32,13 +32,10 @@ import RealmSwift
     }
     public var title: String? {
         get {
-            //TODO: Fix the title
-//            let nameArray = name.split(separator: "/").first
-//             guard  let firstName = nameArray?.first  else{
-//                return nil
-//            }
+
             return name
         }
+        
     }
     public var subtitle: String?{
         get {
@@ -46,6 +43,21 @@ import RealmSwift
             }
 
         }
+    public var rental_methods: List<String> = List()
+//    {
+//        set {
+//            self.rental_methods = Array(newValue)
+//            }
+//        get {
+//            let rm = List<String>()
+//            for item  in self.rental_methods {
+//                rm.append(item)
+//            }
+//
+//            return rm
+//        }
+//    }
+
 
     @objc dynamic var status : StationStatus?
     @objc dynamic var station_id : String = ""
@@ -54,7 +66,8 @@ import RealmSwift
     @objc dynamic var lon: Double = 0.0
     @objc dynamic var address: String = ""
     @objc dynamic var capacity: Int = 0
-    @objc dynamic var rental_methods: [String] = []
+
+//    private var rental_methods: [String] = []
     @objc dynamic var obcn: String = ""
 
     override public static func primaryKey() -> String? {
@@ -62,3 +75,67 @@ import RealmSwift
     }
 
 }
+
+//MARK: Handle with List
+extension List : Decodable where Element : Decodable {
+    public convenience init(from decoder: Decoder) throws {
+        self.init()
+        var container = try decoder.unkeyedContainer()
+        while !container.isAtEnd {
+            let element = try container.decode(Element.self)
+            self.append(element)
+        }
+    }
+}
+
+extension List : Encodable where Element : Encodable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        for element in self {
+            try element.encode(to: container.superEncoder())
+        }
+    }
+}
+
+
+
+//MARK: -Handle with Realm
+
+
+//TODO: jkjk
+
+class StationAnnotation: NSObject, MKAnnotation {
+
+    public var coordinate: CLLocationCoordinate2D
+
+    public var title: String?
+    public var subtitle: String?
+    public var capacity: Int
+    public var status : StationStatus?
+    public var station_id : String = ""
+
+//    init(lat: Double, lon: Double, title: String?,  subtitle: String?, status : StationStatus?, station_id : String = "", capacity: Int ) {
+//        self.capacity = capacity
+//        self.status = status
+//        self.station_id = station_id
+//        self.coordinate = CLLocationCoordinate2DMake(lat, lon)
+//        self.title = title
+//        self.subtitle = subtitle
+//        super.init()
+//    }
+
+    init(station: Station) {
+        self.capacity = station.capacity
+        self.status = station.status
+        self.station_id = station.station_id
+        self.coordinate = CLLocationCoordinate2DMake(station.lat, station.lon)
+        self.title = station.title
+        self.subtitle = station.subtitle
+        super.init()
+    }
+
+
+
+}
+
+

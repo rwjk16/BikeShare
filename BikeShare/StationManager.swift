@@ -11,7 +11,7 @@ import MapKit
 class StationManager: NSObject {
 
 
-    @objc func fetchBikeStation(userLocation location: CLLocationCoordinate2D, searchTerm: String?, completion: @escaping ([MKAnnotation]?) -> ()) {
+    @objc func fetchBikeStation(userLocation location: CLLocationCoordinate2D, searchTerm: String?, completion: @escaping ([Station]?) -> ()) {
 
         guard let bikeStationURL =  URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_information") else {
             print("Error in the bikeStationURL")
@@ -89,58 +89,62 @@ class StationManager: NSObject {
 
         let session: URLSession = URLSession.shared
         let task: URLSessionDataTask = session.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print("\(error)")
-                return
-            }
 
-            guard let httpResponse = response as? HTTPURLResponse else {
-                return
-            }
-
-            let statusCode: Int = httpResponse.statusCode
-
-            if statusCode != 200 {
-                print("Error: status code is equal to \(statusCode)")
-                return
-            }
-
-            guard let data = data else {
-                print("Error data is nil \(self) -  \(#function)")
-                return
-            }
-
-            do {
-
-
-                let decoderJSON = JSONDecoder()
-                let info = try decoderJSON.decode(JsonStatus.self, from: data)
-                let dataInfo = info.data
-
-
-                guard let stationStatusArray: [StationStatus] = dataInfo?.stationStatus else {
+            realmQueue.async {
+                if let error = error {
+                    print("\(error)")
                     return
                 }
-                var newStations = [Station]()
-                for status in stationStatusArray {
-                    if let station: Station = dicOfStations[status.stationID]  {
 
-                        station.status = status
-                        newStations.append(station)
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    return
+                }
 
-                    } else {
-                        print("erro in unwrapping station -statioid: \(status.stationID) - class: \(self) - function: \(#function)")
+                let statusCode: Int = httpResponse.statusCode
+
+                if statusCode != 200 {
+                    print("Error: status code is equal to \(statusCode)")
+                    return
+                }
+
+                guard let data = data else {
+                    print("Error data is nil \(self) -  \(#function)")
+                    return
+                }
+
+                do {
+
+
+                    let decoderJSON = JSONDecoder()
+                    let info = try decoderJSON.decode(JsonStatus.self, from: data)
+                    let dataInfo = info.data
+
+
+                    guard let stationStatusArray: [StationStatus] = dataInfo?.stationStatus else {
+                        return
                     }
+                    var newStations = [Station]()
+                    for status in stationStatusArray {
+                        if let station: Station = dicOfStations[status.stationID]  {
+
+                            station.status = status
+                            newStations.append(station)
+
+                        } else {
+                            print("erro in unwrapping station -statioid: \(status.stationID) - class: \(self) - function: \(#function)")
+                        }
+
+                    }
+//                    DispatchQueue.main.async {
+                        completion(newStations)
+//                    }
 
                 }
-                DispatchQueue.main.async {
-                    completion(newStations)
+                catch let err {
+                    print("Error is\(err)")
                 }
+            }
 
-            }
-            catch let err {
-                print("Error is\(err)")
-            }
         }
         task.resume()
     }

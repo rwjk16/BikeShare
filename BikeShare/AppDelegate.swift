@@ -9,11 +9,14 @@
 import UIKit
 import MapKit
 
+var realmQueue = DispatchQueue(label: "com.Weblay.BikeShare.realm")
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-    var stations : [MKAnnotation] = [Station]()
+       var dao = StationDao.sharedInstance
+    var stations : [Station] = []
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
@@ -22,21 +25,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let mainController = MainMenuViewController()
 
     //Getting the stations
-    let hasData = false
-    if !hasData {
 
 
+    if dao.isEmpty(){
         let manager : StationManager = StationManager()
         manager.fetchBikeStation(userLocation: CLLocationCoordinate2DMake(0, 0), searchTerm: nil) { (stations) in
-
-            manager.fetchStationStatus(stations: stations as! [Station], completion: { (completedStations) in
+            guard let stations = stations else {
+                return
+            }
+            manager.fetchStationStatus(stations: stations, completion: { (completedStations) in
                 if let stations = completedStations {
-                    mainController.stations = stations
+
+
+
+                    DispatchQueue.main.async {
+                        var stationsAnnotation: [StationAnnotation] = []
+                        for station  in stations {
+                            stationsAnnotation.append(StationAnnotation(station: station))
+                        }
+                        mainController.stations = stationsAnnotation
+
+                        self.stations = stations
+                        for station in stations {
+                            self.dao.add(station: station )
+                        }
+                    }
+
+//                    DispatchQueue.main.async {
+//                        mainController.stations = stationsAnnotation
+//
+//                    }
+
                 }
             })
         }
     } else {
-        //read from database
+        if let stations = dao.getAll(){
+            var stationsAnnotation: [StationAnnotation] = []
+            for station  in stations {
+                stationsAnnotation.append(StationAnnotation(station: station))
+            }
+            mainController.stations = stationsAnnotation
+        }
+
     }
 
     let navigationController = UINavigationController(rootViewController: mainController)

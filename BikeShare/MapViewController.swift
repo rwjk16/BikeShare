@@ -14,7 +14,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var stations = [MKAnnotation]() {
         didSet{
 
-            print("\(self) - \(#function) - \(String(describing: (stations[0] as! Station).status))")
+            print("\(self) - \(#function) - \(String(describing: (stations[0] as! StationAnnotation).status))")
         }
     }
     let locationManager: CLLocationManager = CLLocationManager()
@@ -60,6 +60,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func loadStationsToMap()  {
+//        let stationAnnotation : StationAnnotation = StationAnnotation(self.s)
         self.mapView.addAnnotations(self.stations)
         self.mapView.showAnnotations(self.stations, animated: true)
     }
