@@ -10,6 +10,8 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
   
+  var favoriteStations = [Station()]
+  
   let favoritesTableView : UITableView = {
     let tableView = UITableView()
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +28,7 @@ class FavoritesViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     self.navigationController?.navigationBar.isHidden = false
     self.navigationItem.title = "Favorites"
+    self.favoritesTableView.reloadData()
   }
   
   func setupViews(){
@@ -56,12 +59,12 @@ extension FavoritesViewController:UITableViewDelegate{
 
 extension FavoritesViewController:UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    return self.favoriteStations.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! FavoritesCell
-    cell.nameLabel.text = "name placeholder"
+    cell.textLabel?.text = self.favoriteStations[indexPath.row].title
     return cell
   }
   
