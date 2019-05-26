@@ -7,6 +7,7 @@ target 'BikeShare' do
 
   #pod 'UICircularProgressRing'
 pod 'RealmSwift'
+pod 'SVProgressHUD'
 
   # Pods for BikeShare
 
