@@ -25,6 +25,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   let favoritesButton: Button = Button()
   let dockToggle: Button = Button()
   let backButton: Button = Button()
+  let centerButton : Button = Button()
   
   let stationDetailView = StationDetailModalView()
   
@@ -90,6 +91,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     positionFavoritesButton()
     positionDockToggleButton()
     positionBackButton()
+    positionCenterButton()
   }
   
   func setupStationView(){
@@ -130,11 +132,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     backButton.center = CGPoint(x: x, y: y)
   }
   
+  func positionCenterButton(){
+    let x = self.view.frame.maxX * 0.10
+    let y = self.view.frame.maxY * 0.90
+    centerButton.center = CGPoint(x: x, y: y)
+  }
+  
   func setupButtonImages() {
     self.view.insertSubview(refreshButton, aboveSubview: self.mapView)
     self.view.insertSubview(favoritesButton, aboveSubview: self.mapView)
     self.view.insertSubview(dockToggle, aboveSubview: self.mapView)
     self.view.insertSubview(backButton, aboveSubview: self.mapView)
+    self.view.insertSubview(centerButton, aboveSubview: self.mapView)
     
     if let image = UIImage(named: "refresh") {
       refreshButton.setImage(image, for: .normal)
@@ -155,16 +164,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
       backButton.setImage(image, for: .normal)
     }
     backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+    
+    centerButton.setImage(UIImage(named: "compass"), for: .normal)
+    centerButton.addTarget(self, action: #selector(handleCenter), for: .touchUpInside)
   }
   
   @objc func refreshButtonPressed() {
     //TODO: handle refresh
     refreshButton.rotateImage()
-    self.locationManager.startUpdatingLocation()
     fetchStationStatus()
-    Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
-      self.locationManager.stopUpdatingLocation()
-    }
   }
   
   @objc func favoritesButtonPressed() {
@@ -250,6 +258,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     let mapItem = MKMapItem(placemark: placeMark)
     mapItem.name = stationSelected?.address
     mapItem.openInMaps(launchOptions: options)
+  }
+  
+  @objc func handleCenter(){
+   locationManager.startUpdatingLocation()
+    mapView.centerCoordinate = currentLocation.coordinate
+    setupRegion()
+    locationManager.stopUpdatingLocation()
   }
 }
   
