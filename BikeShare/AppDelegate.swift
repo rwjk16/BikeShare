@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //Getting the stations
     func setDao(){
-      
       if dao.isEmpty(){
         let manager : StationManager = StationManager()
         manager.fetchBikeStation(userLocation: CLLocationCoordinate2DMake(0, 0), searchTerm: nil) { (stations) in
