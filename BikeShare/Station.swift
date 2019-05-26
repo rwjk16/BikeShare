@@ -24,7 +24,7 @@ import RealmSwift
   var stations : [Station]?
 }
 
-@objcMembers public class Station: Object, Codable {
+@objcMembers public class Station: Object, Codable, MKAnnotation {
   public var coordinate: CLLocationCoordinate2D {
         get {
             return CLLocationCoordinate2DMake(lat, lon)
@@ -42,21 +42,7 @@ import RealmSwift
             return address
             }
 
-        }
-    public var rental_methods: List<String> = List()
-//    {
-//        set {
-//            self.rental_methods = Array(newValue)
-//            }
-//        get {
-//            let rm = List<String>()
-//            for item  in self.rental_methods {
-//                rm.append(item)
-//            }
-//
-//            return rm
-//        }
-//    }
+}
 
 
     @objc dynamic var status : StationStatus?
@@ -74,6 +60,28 @@ import RealmSwift
         return "station_id"
     }
 
+    public class func convertAnnotationToStation(_ stationAnnotation: StationAnnotation) -> Station{
+        let station = Station()
+        if let address = stationAnnotation.subtitle {
+            station.address = address
+        }
+        if let name = stationAnnotation.title {
+            station.name = name
+        }
+        if let status = stationAnnotation.status {
+            station.status = status
+        }
+
+        station.lat = stationAnnotation.coordinate.latitude
+        station.lon =  stationAnnotation.coordinate.longitude
+        station.station_id = stationAnnotation.station_id
+        station.capacity = stationAnnotation.capacity
+        return station
+    }
+}
+
+public class RetalMethod: Object, Codable {
+    @objc dynamic var rental: String?
 }
 
 //MARK: Handle with List
@@ -98,13 +106,8 @@ extension List : Encodable where Element : Encodable {
 }
 
 
-
 //MARK: -Handle with Realm
-
-
-//TODO: jkjk
-
-class StationAnnotation: NSObject, MKAnnotation {
+public class StationAnnotation: NSObject, MKAnnotation {
 
     public var coordinate: CLLocationCoordinate2D
 
@@ -113,16 +116,6 @@ class StationAnnotation: NSObject, MKAnnotation {
     public var capacity: Int
     public var status : StationStatus?
     public var station_id : String = ""
-
-//    init(lat: Double, lon: Double, title: String?,  subtitle: String?, status : StationStatus?, station_id : String = "", capacity: Int ) {
-//        self.capacity = capacity
-//        self.status = status
-//        self.station_id = station_id
-//        self.coordinate = CLLocationCoordinate2DMake(lat, lon)
-//        self.title = title
-//        self.subtitle = subtitle
-//        super.init()
-//    }
 
     init(station: Station) {
         self.capacity = station.capacity
@@ -133,9 +126,40 @@ class StationAnnotation: NSObject, MKAnnotation {
         self.subtitle = station.subtitle
         super.init()
     }
-
-
-
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    public let rental_methods: List<RetalMethod>
+//    {
+//        set {
+//            self.rental_methods = Array(newValue)
+//            }
+//        get {
+//            let rm = List<String>()
+//            for item  in self.rental_methods {
+//                rm.append(item)
+//            }
+//
+//            return rm
+//        }
+//    }

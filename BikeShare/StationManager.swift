@@ -58,7 +58,7 @@ class StationManager: NSObject {
                     arrayStations.append(station)
 
                 }
-
+//                print("##########\(arrayStations[0].rental_methods[0])")
                 DispatchQueue.main.async {
                     completion(arrayStations)
                 }
@@ -81,7 +81,7 @@ class StationManager: NSObject {
         var request: URLRequest = URLRequest(url: stationStatusURL)
         request.httpMethod = "GET"
 
-        //create a dictionary to search a station by id
+        //created a dictionary to search a station by id
         var dicOfStations: Dictionary<String, Station> = Dictionary<String,Station> ()
         for station  in stations {
             dicOfStations[station.station_id] = station

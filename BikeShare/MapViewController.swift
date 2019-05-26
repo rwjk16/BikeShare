@@ -14,7 +14,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var stations = [MKAnnotation]() {
         didSet{
 
-            print("\(self) - \(#function) - \(String(describing: (stations[0] as! StationAnnotation).status))")
+//            print("\(self) - \(#function) - \(String(describing: (stations[0] as! StationAnnotation).status))")
         }
     }
     let locationManager: CLLocationManager = CLLocationManager()
@@ -30,6 +30,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.mapType = MKMapType.standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
+        mapView.isUserInteractionEnabled = true
         return mapView
     }()
 
@@ -126,6 +127,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     @objc func refreshButtonPressed() {
         //TODO: handle refresh
+        let stationManager = StationManager()
+        stationManager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil) { stations in
+            guard let stations = stations else {
+                return
+            }
+            self.stations = stations
+        }
+
+        loadStationsToMap()
+//        setupRegion()
+//        var normalStations = [Station]()
+//        for annotation  in self.stations {
+//            normalStations.append(Station.convertAnnotationToStation(annotation as! StationAnnotation))
+//        }
+//
+//        stationManager.fetchStationStatus(stations: normalStations) { stations in
+//            let dao = StationDao.sharedInstance
+//            for station in self.stations {
+//                dao.add(station: station as! Station)
+//            }
+//            self.stations = stations as! [MKAnnotation];
+//
+//        }
+
+
         refreshButton.rotateImageThenShowLoading()
         print("button smashed")
     }
