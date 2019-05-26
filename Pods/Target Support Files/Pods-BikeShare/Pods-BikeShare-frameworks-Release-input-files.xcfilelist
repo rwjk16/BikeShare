@@ -1,3 +1,8 @@
 ${PODS_ROOT}/Target Support Files/Pods-BikeShare/Pods-BikeShare-frameworks.sh
+<<<<<<< HEAD
 ${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
 ${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework
+=======
+${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework
+${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework
+>>>>>>> 60ff1bdff3b2818f7db205d46b5f9e5f983a8188

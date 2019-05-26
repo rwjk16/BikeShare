@@ -13,11 +13,10 @@ class RefreshButton: Button {
   var originalButtonText: String?
   var activityIndicator: UIActivityIndicatorView!
   
-  func rotateImageThenShowLoading() {
+  func rotateImage() {
     UIView.animate(withDuration: 2.0) {
       self.transform = self.transform.rotated(by: -.pi/1.0000000000001)
     }
-    showLoading()
   }
   
   func showLoading() {

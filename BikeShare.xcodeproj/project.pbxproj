@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		25298B772298936100E4C3B3 /* StationDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25298B762298936100E4C3B3 /* StationDao.swift */; };
 		256378B122985BE1005E52A8 /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AB22985BE1005E52A8 /* FavoritesCell.swift */; };
 		256378B222985BE1005E52A8 /* FavoritesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AC22985BE1005E52A8 /* FavoritesDetailController.swift */; };
 		256378B322985BE1005E52A8 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256378AD22985BE1005E52A8 /* FavoritesViewController.swift */; };
@@ -18,6 +17,7 @@
 		25BCF6DD229707010049340F /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCF6D7229707000049340F /* MainMenuViewController.swift */; };
 		25BCF6DE229707010049340F /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCF6D8229707010049340F /* Station.swift */; };
 		25BCF6DF229707010049340F /* PlansCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCF6DA229707010049340F /* PlansCell.swift */; };
+		25BCF6E0229707010049340F /* Json.swift_ in Sources */ = {isa = PBXBuildFile; fileRef = 25BCF6DB229707010049340F /* Json.swift_ */; };
 		25BCF6E2229708170049340F /* StationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCF6E1229708170049340F /* StationManager.swift */; };
 		25BCF6E6229739510049340F /* StationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCF6E5229739510049340F /* StationStatus.swift */; };
 		5FD99230DBB71DCB187583CE /* Pods_BikeShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D474C286C9B27B3344193DB0 /* Pods_BikeShare.framework */; };
@@ -28,10 +28,11 @@
 		D2E470F0229583EC00752B98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2E470EE229583EC00752B98 /* Main.storyboard */; };
 		D2E470F2229583ED00752B98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2E470F1229583ED00752B98 /* Assets.xcassets */; };
 		D2E470F5229583ED00752B98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2E470F3229583ED00752B98 /* LaunchScreen.storyboard */; };
+		E9FAFE92229DD39C0073F508 /* StationDetailModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FAFE91229DD39C0073F508 /* StationDetailModalView.swift */; };
+		E9FAFE94229DD39C0073F508 /* Json.swift_ in Resources */ = {isa = PBXBuildFile; fileRef = E9FAFE93229DD39C0073F508 /* Json.swift_ */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		25298B762298936100E4C3B3 /* StationDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDao.swift; sourceTree = "<group>"; };
 		256378AB22985BE1005E52A8 /* FavoritesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
 		256378AC22985BE1005E52A8 /* FavoritesDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesDetailController.swift; sourceTree = "<group>"; };
 		256378AD22985BE1005E52A8 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +44,7 @@
 		25BCF6D8229707010049340F /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		25BCF6D9229707010049340F /* BikeShare-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BikeShare-Bridging-Header.h"; sourceTree = "<group>"; };
 		25BCF6DA229707010049340F /* PlansCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlansCell.swift; sourceTree = "<group>"; };
+		25BCF6DB229707010049340F /* Json.swift_ */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Json.swift_; sourceTree = "<group>"; };
 		25BCF6E1229708170049340F /* StationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationManager.swift; sourceTree = "<group>"; };
 		25BCF6E5229739510049340F /* StationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationStatus.swift; sourceTree = "<group>"; };
 		6A49067EF268BA2AACD4912A /* Pods-BikeShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BikeShare.debug.xcconfig"; path = "Target Support Files/Pods-BikeShare/Pods-BikeShare.debug.xcconfig"; sourceTree = "<group>"; };
@@ -57,6 +59,8 @@
 		D2E470F4229583ED00752B98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2E470F6229583ED00752B98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D474C286C9B27B3344193DB0 /* Pods_BikeShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BikeShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9FAFE91229DD39C0073F508 /* StationDetailModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationDetailModalView.swift; sourceTree = "<group>"; };
+		E9FAFE93229DD39C0073F508 /* Json.swift_ */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Json.swift_; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,9 @@
 				D2E470EA229583EC00752B98 /* AppDelegate.swift */,
 				D2E470EC229583EC00752B98 /* MapViewController.swift */,
 				25BCF6D9229707010049340F /* BikeShare-Bridging-Header.h */,
+				E9FAFE91229DD39C0073F508 /* StationDetailModalView.swift */,
+				25BCF6DB229707010049340F /* Json.swift_ */,
+				E9FAFE93229DD39C0073F508 /* Json.swift_ */,
 				25BCF6D7229707000049340F /* MainMenuViewController.swift */,
 				256378AB22985BE1005E52A8 /* FavoritesCell.swift */,
 				256378AC22985BE1005E52A8 /* FavoritesDetailController.swift */,
@@ -124,7 +131,6 @@
 				25BCF6DA229707010049340F /* PlansCell.swift */,
 				25BCF6D6229707000049340F /* PlansViewController.swift */,
 				25BCF6D8229707010049340F /* Station.swift */,
-				25298B762298936100E4C3B3 /* StationDao.swift */,
 				25BCF6E5229739510049340F /* StationStatus.swift */,
 				25BCF6E1229708170049340F /* StationManager.swift */,
 				D2E470EE229583EC00752B98 /* Main.storyboard */,
@@ -205,6 +211,7 @@
 				D2E470F5229583ED00752B98 /* LaunchScreen.storyboard in Resources */,
 				D2E470F2229583ED00752B98 /* Assets.xcassets in Resources */,
 				D2E470F0229583EC00752B98 /* Main.storyboard in Resources */,
+				E9FAFE94229DD39C0073F508 /* Json.swift_ in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +268,6 @@
 				256378B322985BE1005E52A8 /* FavoritesViewController.swift in Sources */,
 				256378B522985BE1005E52A8 /* PricePlan.swift in Sources */,
 				25BCF6DF229707010049340F /* PlansCell.swift in Sources */,
-				25298B772298936100E4C3B3 /* StationDao.swift in Sources */,
 				D2E470ED229583EC00752B98 /* MapViewController.swift in Sources */,
 				25BCF6E6229739510049340F /* StationStatus.swift in Sources */,
 				25BCF6DD229707010049340F /* MainMenuViewController.swift in Sources */,
@@ -272,6 +278,8 @@
 				D22009A32295FDF100E893A0 /* Button.swift in Sources */,
 				25BCF6DE229707010049340F /* Station.swift in Sources */,
 				D2E470EB229583EC00752B98 /* AppDelegate.swift in Sources */,
+				E9FAFE92229DD39C0073F508 /* StationDetailModalView.swift in Sources */,
+				25BCF6E0229707010049340F /* Json.swift_ in Sources */,
 				256378B122985BE1005E52A8 /* FavoritesCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,7 +339,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -393,7 +400,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -424,7 +430,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 489ZVWUGPK;
+				DEVELOPMENT_TEAM = M2U5V49YFZ;
 				INFOPLIST_FILE = BikeShare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -448,7 +454,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 489ZVWUGPK;
+				DEVELOPMENT_TEAM = M2U5V49YFZ;
 				INFOPLIST_FILE = BikeShare/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (

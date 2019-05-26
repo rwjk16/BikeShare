@@ -60,8 +60,8 @@ class PlansCell: UITableViewCell {
   let planImageView : UIImageView = {
     let iv = UIImageView()
     iv.contentMode = .scaleAspectFit
-    iv.clipsToBounds = true
-    iv.layer.cornerRadius = 30
+//    iv.clipsToBounds = true
+//    iv.layer.cornerRadius = 30
     iv.translatesAutoresizingMaskIntoConstraints = false
     return iv
   }()
@@ -70,15 +70,10 @@ class PlansCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    self.selectionStyle = UITableViewCell.SelectionStyle.none
     
     self.contentView.addSubview(containerView)
     self.backgroundColor = UIColor(red: 0/255, green: 181.0/255, blue: 204.0/255, alpha: 1.0)
