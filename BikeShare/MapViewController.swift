@@ -18,6 +18,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   var stationStatus = [stationStatusStruct]()
   let locationManager: CLLocationManager = CLLocationManager()
   var currentLocation: CLLocation = CLLocation()
+  var stationSelected : Station?
+  let manager = StationManager()
   
   let refreshButton: RefreshButton = RefreshButton()
   let favoritesButton: Button = Button()
@@ -45,7 +47,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     mapView.delegate = self
     
     setupViews()
-    setupManager()
+    fetchBikeStations()
+    fetchStationStatus()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -57,8 +60,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   }
   
   
-  func setupManager(){
-    let manager = StationManager()
+  func fetchBikeStations(){
     manager.fetchBikeStation(userLocation: currentLocation.coordinate, searchTerm: nil) { stations in
       guard let stations = stations else {return}
       
@@ -67,7 +69,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
       self.mapView.showAnnotations(self.stations, animated: true)
       self.locationManager.stopUpdatingLocation()
     }
-    
+  }
+  
+  func fetchStationStatus(){
     manager.fetchStationStatusStruct { (statuses) in
       self.stationStatus = statuses
     }
@@ -93,6 +97,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     stationDetailView.backgroundColor = .white
     self.view.addSubview(stationDetailView)
     stationDetailView.favoriteButton.addTarget(self, action: #selector(handleFav), for: .touchUpInside)
+    stationDetailView.directionButton.addTarget(self, action: #selector(handleDirection), for: .touchUpInside)
     
     NSLayoutConstraint.activate([
       stationDetailView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
@@ -156,7 +161,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     //TODO: handle refresh
     refreshButton.rotateImage()
     self.locationManager.startUpdatingLocation()
-    Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
+    fetchStationStatus()
+    Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (timer) in
       self.locationManager.stopUpdatingLocation()
     }
   }
@@ -233,6 +239,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
       }
     }
   }
+  
+  @objc func handleDirection(){
+    guard let coordinate = stationSelected?.coordinate else {return}
+    let regionDistance = 1000.0
+    let regionSpan = MKCoordinateRegion(center: coordinate,latitudinalMeters: regionDistance,longitudinalMeters: regionDistance)
+    let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+    
+    let placeMark = MKPlacemark(coordinate: coordinate)
+    let mapItem = MKMapItem(placemark: placeMark)
+    mapItem.name = stationSelected?.address
+    mapItem.openInMaps(launchOptions: options)
+  }
 }
   
   extension MapViewController:MKMapViewDelegate{
@@ -240,6 +258,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
       var numBikes = ""
       var numDocks = ""
       if let annotation = view.annotation as? Station{
+        self.stationSelected = annotation
         let id = annotation.station_id
         for station in self.stationStatus{
           if station.station_id == id{
