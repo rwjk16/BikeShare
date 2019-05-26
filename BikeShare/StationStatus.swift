@@ -7,10 +7,10 @@
 //
 
 import Foundation
-
+import RealmSwift
 // MARK: - Welcome
 
- public class JsonStatus: Codable {
+@objc public class JsonStatus: NSObject, Codable {
     public var lastUpdated : Int
     public var data: DataInfo?
 
@@ -26,7 +26,7 @@ import Foundation
 }
 
 // MARK: - DataInfo
- public class DataInfo:  Codable {
+@objcMembers public class DataInfo: NSObject, Codable {
     public var stationStatus: [StationStatus]
     enum CodingKeys: String, CodingKey {
         case stationStatus = "stations"
@@ -38,15 +38,15 @@ import Foundation
 }
 
 // MARK: - StationStatus
- public class StationStatus: Codable {
-    public var stationID: String = ""
-    public var numBikesAvailable: Int = 0
-    public var numBikesDisabled: Int  = 0
-    public var numDocksAvailable: Int = 0
-    public var numDocksDisabled : Int = 0
-    public var isInstalled: Int = 0
-    public var isChargingStation: Bool
-    public var status: String
+@objc public class StationStatus: Object, Codable {
+    @objc dynamic public var stationID: String = ""
+    @objc dynamic public var numBikesAvailable: Int = 0
+    @objc dynamic public var numBikesDisabled: Int  = 0
+    @objc dynamic public var numDocksAvailable: Int = 0
+    @objc dynamic public var numDocksDisabled : Int = 0
+    @objc dynamic public var isInstalled: Int = 0
+    @objc dynamic public var isChargingStation: Bool
+    @objc dynamic public var status: String
 
     enum CodingKeys: String, CodingKey {
         case stationID = "station_id"
@@ -59,21 +59,24 @@ import Foundation
         case status = "status"
     }
 
-    public init(stationID: String,
-                numBikesAvailable: Int,
-                numBikesDisabled: Int,
-                numDocksAvailable: Int,
-                numDocksDisabled: Int,
-                isInstalled: Int,
-                isChargingStation: Bool,
-                status: String) {
-        self.stationID = stationID
-        self.numBikesAvailable = numBikesAvailable
-        self.numBikesDisabled = numBikesDisabled
-        self.numDocksAvailable = numDocksAvailable
-        self.numDocksDisabled = numDocksDisabled
-        self.isInstalled = isInstalled
-        self.isChargingStation = isChargingStation
-        self.status = status
-    }
+//
+//    convenience public init(stationID: String,
+//                numBikesAvailable: Int,
+//                numBikesDisabled: Int,
+//                numDocksAvailable: Int,
+//                numDocksDisabled: Int,
+//                isInstalled: Int,
+//                isChargingStation: Bool,
+//                status: String) {
+//        self.stationID = stationID
+//        self.numBikesAvailable = numBikesAvailable
+//        self.numBikesDisabled = numBikesDisabled
+//        self.numDocksAvailable = numDocksAvailable
+//        self.numDocksDisabled = numDocksDisabled
+//        self.isInstalled = isInstalled
+//        self.isChargingStation = isChargingStation
+//        self.status = status
+//    }
+
+
 }

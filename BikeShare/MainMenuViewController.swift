@@ -14,7 +14,7 @@ final class MainMenuViewController: UIViewController {
     var stations : [MKAnnotation] = [] {
         didSet{
 
-            print("\(self) - \(#function) - \(String(describing: (stations[0] as! Station).status))")
+            print("\(self) - \(#function) - \(String(describing: (stations[0] as! StationAnnotation).status))")
         }
     }
     let containerView: UIView = {
