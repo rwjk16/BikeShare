@@ -217,11 +217,11 @@ class StationManager: NSObject {
   func fetchStationStatusStruct(completion: @escaping ([stationStatusStruct]) -> ()) {
     struct DataResponse: Decodable
     {
-      let data:PlanResponse
+      let data: StationResponse
     }
     
-    struct PlanResponse: Decodable{
-      let stationStatuses:[stationStatusStruct]
+    struct StationResponse : Decodable{
+      let stations:[stationStatusStruct]
     }
     
     guard let bikeStatus =  URL(string: "https://tor.publicbikesystem.net/ube/gbfs/v1/en/station_status") else {return}
@@ -268,8 +268,7 @@ class StationManager: NSObject {
         let decoder = JSONDecoder()
         let dataResponse = try decoder.decode(DataResponse.self, from: data)
         let statusResponse = dataResponse.data
-        let statuses = statusResponse.stationStatuses
-        print(plans)
+        let statuses = statusResponse.stations
         
         DispatchQueue.main.async {
           completion(statuses)
