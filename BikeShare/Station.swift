@@ -10,13 +10,9 @@ import Foundation
 import MapKit
 import RealmSwift
 
-
-
-
 @objc public class Json: NSObject, Codable {
     var last_updated : Date
     var data: DataClass
-
 }
 
 @objcMembers public class DataClass: Codable {

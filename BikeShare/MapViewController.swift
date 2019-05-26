@@ -15,6 +15,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   
   var favoriteStations = [MKAnnotation]()
   var stations = [MKAnnotation]()
+  var stationStatus = [stationStatusStruct]()
   let locationManager: CLLocationManager = CLLocationManager()
   var currentLocation: CLLocation = CLLocation()
   
@@ -65,6 +66,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
       self.mapView.addAnnotations(self.stations)
       self.mapView.showAnnotations(self.stations, animated: true)
       self.locationManager.stopUpdatingLocation()
+    }
+    
+    manager.fetchStationStatusStruct { (statuses) in
+      self.stationStatus = statuses
     }
   }
   
@@ -154,7 +159,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
       self.locationManager.stopUpdatingLocation()
     }
-    print("button smashed")
   }
   
   @objc func favoritesButtonPressed() {
@@ -165,7 +169,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   
   @objc func dockToggleButtonPressed() {
     //TODO: annotation/view switch from bike to dock
-    print("button smashed")
   }
   
   @objc func backButtonPressed() {
@@ -234,28 +237,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   
   extension MapViewController:MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-      
+      var numBikes = ""
+      var numDocks = ""
       if let annotation = view.annotation as? Station{
-        let bikesText = NSMutableAttributedString(string: "1", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
+        let id = annotation.station_id
+        for station in self.stationStatus{
+          if station.station_id == id{
+            numBikes = String(station.num_bikes_available)
+            numDocks = String(station.num_docks_available)
+          }
+        }
+        let bikesText = NSMutableAttributedString(string: numBikes, attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
         
         bikesText.append(NSAttributedString(string: "\nBikes", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
         
         
-        let docksText = NSMutableAttributedString(string: "2", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
+        let docksText = NSMutableAttributedString(string: numDocks, attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
         docksText.append(NSAttributedString(string: "\nDocks", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
         
         if view.annotation is MKUserLocation{
           return
         }
         
-        
         self.stationDetailView.numOfBikesLabel.attributedText = bikesText
         self.stationDetailView.numOfDocksLabel.attributedText = docksText
         self.stationDetailView.stationNameLabel.text = annotation.name
+        
       }
-      
-
-
       
       UIView.transition(with: stationDetailView, duration: 0.3, options: .transitionCrossDissolve, animations: {
         self.stationDetailView.isHidden = false
