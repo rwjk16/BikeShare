@@ -24,6 +24,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   let dockToggle: Button = Button()
   let backButton: Button = Button()
   
+  var dockToggled = false
+  
   let stationDetailView = StationDetailModalView()
   
   let mapView: MKMapView = {
@@ -169,6 +171,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   
   @objc func dockToggleButtonPressed() {
     //TODO: annotation/view switch from bike to dock
+    self.dockToggled = !self.dockToggled
+    self.mapView.removeAnnotations(self.mapView.annotations)
+    self.mapView.addAnnotations(self.stations)
   }
   
   @objc func backButtonPressed() {
@@ -186,7 +191,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     mapView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
   }
-
+  
   func setupRegion() {
     let lat = 0.01
     let lng = 0.01
@@ -234,64 +239,99 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     }
   }
 }
-  
-  extension MapViewController:MKMapViewDelegate{
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-      var numBikes = ""
-      var numDocks = ""
-      if let annotation = view.annotation as? Station{
-        let id = annotation.station_id
-        for station in self.stationStatus{
-          if station.station_id == id{
-            numBikes = String(station.num_bikes_available)
-            numDocks = String(station.num_docks_available)
-          }
+
+extension MapViewController:MKMapViewDelegate{
+  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    var numBikes = ""
+    var numDocks = ""
+    if let annotation = view.annotation as? Station{
+      let id = annotation.station_id
+      for station in self.stationStatus{
+        if station.station_id == id{
+          numBikes = String(station.num_bikes_available)
+          numDocks = String(station.num_docks_available)
         }
-        let bikesText = NSMutableAttributedString(string: numBikes, attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
-        
-        bikesText.append(NSAttributedString(string: "\nBikes", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
-        
-        
-        let docksText = NSMutableAttributedString(string: numDocks, attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
-        docksText.append(NSAttributedString(string: "\nDocks", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
-        
-        if view.annotation is MKUserLocation{
-          return
-        }
-        
-        self.stationDetailView.numOfBikesLabel.attributedText = bikesText
-        self.stationDetailView.numOfDocksLabel.attributedText = docksText
-        self.stationDetailView.stationNameLabel.text = annotation.name
-        
+      }
+      let bikesText = NSMutableAttributedString(string: numBikes, attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
+      
+      bikesText.append(NSAttributedString(string: "\nBikes", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
+      
+      
+      let docksText = NSMutableAttributedString(string: numDocks, attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
+      docksText.append(NSAttributedString(string: "\nDocks", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
+      
+      if view.annotation is MKUserLocation{
+        return
       }
       
-      UIView.transition(with: stationDetailView, duration: 0.3, options: .transitionCrossDissolve, animations: {
-        self.stationDetailView.isHidden = false
-      }, completion: nil)
+      self.stationDetailView.numOfBikesLabel.attributedText = bikesText
+      self.stationDetailView.numOfDocksLabel.attributedText = docksText
+      self.stationDetailView.stationNameLabel.text = annotation.name
+      
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
-    {
-      if (annotation is MKUserLocation) {
-        return nil
-      }
-      
-      let annotationIdentifier = "AnnotationIdentifier"
-      var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
-      
-      if annotationView == nil {
-        annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-        annotationView!.canShowCallout = true
-      }
-      else {
-        annotationView!.annotation = annotation
-      }
-      
-      let pinImage = UIImage(named: "infoPin")
-      annotationView!.image = pinImage
-      annotationView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * 0.07, height: self.view.frame.size.width * 0.07)
-      return annotationView
+    UIView.transition(with: stationDetailView, duration: 0.3, options: .transitionCrossDissolve, animations: {
+      self.stationDetailView.isHidden = false
+    }, completion: nil)
+  }
+  
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
+  {
+    if (annotation is MKUserLocation) {
+      return nil
     }
+    
+    let annotationIdentifier = "AnnotationIdentifier"
+    var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
+    
+    if annotationView == nil {
+      annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+      annotationView!.canShowCallout = true
+    }
+    else {
+      annotationView!.annotation = annotation
+    }
+    
+    var pinImage = UIImage(named: "infoPin")
+    if let annotation = annotation as? Station{
+      let id = annotation.station_id
+      for station in self.stationStatus{
+        if station.station_id == id{
+          if !self.dockToggled {
+            let numBikes = station.num_bikes_available
+            switch numBikes{
+            case 15...99:
+              pinImage = UIImage(named: "bikeFull")
+            case 3..<15:
+              pinImage = UIImage(named: "bikeMedium")
+            case 0..<3:
+              pinImage = UIImage(named: "bikeEmpty")
+            default:
+              pinImage = UIImage(named: "infoPin")
+          }
+
+          } else {
+            let numDocks = station.num_docks_available
+            switch numDocks{
+            case 15...99:
+              pinImage = UIImage(named: "dockFull")
+            case 3..<15:
+              pinImage = UIImage(named: "dockMedium")
+            case 0..<3:
+              pinImage = UIImage(named: "dockEmpty")
+            default:
+              pinImage = UIImage(named: "infoPin")
+            
+          }
+          }
+        }
+      }
+    }
+        
+        annotationView!.image = pinImage
+        annotationView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width * 0.07, height: self.view.frame.size.width * 0.07)
+        return annotationView
+      }
 }
 
 
