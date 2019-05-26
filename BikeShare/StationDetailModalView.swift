@@ -43,20 +43,14 @@ class StationDetailModalView: UIView {
   let directionButton: UIButton = {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle("Plan a ride", for: .normal)
-    button.backgroundColor = .blue
-    button.clipsToBounds = true
-    button.layer.cornerRadius = 30
+    button.setImage(UIImage(named: "map"), for: .normal)
     return button
   }()
   
   let favoriteButton: UIButton = {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle("fav", for: .normal)
-    button.backgroundColor = .yellow
-    button.clipsToBounds = true
-    button.layer.cornerRadius = 20
+    button.setImage(UIImage(named: "star"), for: .normal)
     return button
   }()
 

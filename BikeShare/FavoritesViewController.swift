@@ -75,6 +75,8 @@ extension FavoritesViewController:UITableViewDataSource{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     print("selected roll")
     let detailViewController = FavoritesDetailController()
+    let station = self.favoriteStations[indexPath.row]
+    detailViewController.station = station
     self.navigationController?.pushViewController(detailViewController, animated: true)
   }
   
