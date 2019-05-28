@@ -14,7 +14,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
   var stations = [MKAnnotation]()
   let locationManager: CLLocationManager = CLLocationManager()
   var currentLocation: CLLocation = CLLocation()
-  var stations : [MKAnnotation] = []
   
   let refreshButton: RefreshButton = RefreshButton()
   let favoritesButton: Button = Button()
