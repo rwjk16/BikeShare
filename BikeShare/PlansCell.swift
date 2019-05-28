@@ -81,7 +81,7 @@ class PlansCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     self.contentView.addSubview(containerView)
-    self.backgroundColor = .lightGray
+    self.backgroundColor = UIColor(red: 0/255, green: 181.0/255, blue: 204.0/255, alpha: 1.0)
     
     NSLayoutConstraint.activate([
       containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
@@ -100,7 +100,7 @@ class PlansCell: UITableViewCell {
       stackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
     
       planNameLabel.heightAnchor.constraint(equalToConstant: 30),
-      planDescriptionLabel.heightAnchor.constraint(equalToConstant: 30),
+      planDescriptionLabel.heightAnchor.constraint(equalToConstant: 40),
       planPriceLabel.heightAnchor.constraint(equalToConstant: 30)
       ])
   }
