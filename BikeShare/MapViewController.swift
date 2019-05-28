@@ -214,6 +214,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
       let docksText = NSMutableAttributedString(string: "2", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
       docksText.append(NSAttributedString(string: "\nDocks", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
       
+      if view.annotation is MKUserLocation{
+        return
+      }
+      
       if let annotation = view.annotation as? Station{
         self.stationDetailView.numOfBikesLabel.attributedText = bikesText
         self.stationDetailView.numOfDocksLabel.attributedText = docksText
