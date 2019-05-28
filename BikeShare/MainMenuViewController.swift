@@ -8,9 +8,9 @@
 
 import UIKit
 
-class MainMenuViewController: UIViewController {
+final class MainMenuViewController: UIViewController {
   
-  let containerView : UIView = {
+  let containerView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
@@ -32,7 +32,7 @@ class MainMenuViewController: UIViewController {
     return iv
   }()
   
-  let plansButton : UIButton = {
+  let plansButton: UIButton = {
     let button = UIButton()
     button.setTitle("VIEW PRICING DETAIL", for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -54,13 +54,23 @@ class MainMenuViewController: UIViewController {
     button.backgroundColor = .white
     return button
   }()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-      setupViews()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupViews()
   }
   
-  func setupViews(){
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    guard let navi = navigationController else { return }
+    navi.navigationBar.isHidden = true
+    navi.navigationBar.barTintColor = UIColor(red: 0/255, green: 181.0/255, blue: 204.0/255, alpha: 1.0)
+    navi.navigationBar.tintColor = UIColor.white
+    navi.navigationBar.setValue(true, forKey: "hidesShadow")
+    navi.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, .font:UIFont.boldSystemFont(ofSize: 18)]
+  }
+  
+  func setupViews() {
     containerView.addSubview(imageView)
     containerView.addSubview(plansButton)
     containerView.addSubview(showMapButton)
@@ -87,23 +97,23 @@ class MainMenuViewController: UIViewController {
       plansButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
       plansButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 0),
       plansButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: 170),
-      plansButton.heightAnchor.constraint(equalToConstant: 40),
+      plansButton.heightAnchor.constraint(equalToConstant: 55),
       
       showMapButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 50),
       showMapButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -50),
       showMapButton.topAnchor.constraint(equalTo: plansButton.bottomAnchor, constant: 8),
-      showMapButton.heightAnchor.constraint(equalToConstant: 40),
+      showMapButton.heightAnchor.constraint(equalToConstant: 55),
       ])
   }
   
-  @objc func handlePlans(){
+  @objc func handlePlans() {
     let plansViewController = PlansViewController()
-    self.present(plansViewController, animated: true, completion: nil)
+    self.navigationController?.pushViewController(plansViewController, animated: true)
   }
   
-  @objc func handleShowMap(){
+  @objc func handleShowMap() {
     let mapviewController = MapViewController()
-    self.present(mapviewController, animated: true, completion: nil)
+    self.navigationController?.pushViewController(mapviewController, animated: true)
   }
 
 

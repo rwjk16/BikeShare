@@ -11,6 +11,7 @@ import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
   
+  var stations = [MKAnnotation]()
   let locationManager: CLLocationManager = CLLocationManager()
   var currentLocation: CLLocation = CLLocation()
   
@@ -43,11 +44,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     print(refreshButton.frame)
     
-    // next line to test the manager
     let manager = StationManager()
-    manager.fetchBikeStation(userLocation: currentLocation.coordinate) { LOL in
+    manager.fetchBikeStation(userLocation: currentLocation.coordinate) { stations in
+      guard let stations = stations else {return}
+      print(stations)
+      
+      self.stations = stations
+      self.mapView.addAnnotations(self.stations)
+      self.mapView.showAnnotations(self.stations, animated: true)
     }
-    //End manager test
   }
   
   override func viewWillAppear(_ animated: Bool) {
