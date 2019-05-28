@@ -33,7 +33,6 @@ class PlansViewController: UIViewController{
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = UIColor(red: 0/255, green: 181.0/255, blue: 204.0/255, alpha: 1.0)
     setupView()
     
     manager.fetchPricePlan { (plans) in
@@ -58,7 +57,7 @@ class PlansViewController: UIViewController{
     tableView.dataSource = self
     
     NSLayoutConstraint.activate([
-      tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0),
+      tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
       tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
       tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
       tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),

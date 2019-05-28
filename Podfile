@@ -6,6 +6,7 @@ target 'BikeShare' do
   use_frameworks!
 
 pod 'UICircularProgressRing'
+pod 'ProgressHUDSwift'
 
   # Pods for BikeShare
 

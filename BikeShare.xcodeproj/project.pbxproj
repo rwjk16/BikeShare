@@ -26,6 +26,7 @@
 		E9FAFE4C22984DEA0073F508 /* PlansCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FAFE4B22984DEA0073F508 /* PlansCell.swift */; };
 		E9FAFE51229D968B0073F508 /* PlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FAFE4F229D968B0073F508 /* PlansViewController.swift */; };
 		E9FAFE52229D968B0073F508 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FAFE50229D968B0073F508 /* MainMenuViewController.swift */; };
+		E9FAFE54229DA0E40073F508 /* StationDetailModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FAFE53229DA0E40073F508 /* StationDetailModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		E9FAFE4B22984DEA0073F508 /* PlansCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlansCell.swift; sourceTree = "<group>"; };
 		E9FAFE4F229D968B0073F508 /* PlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlansViewController.swift; sourceTree = "<group>"; };
 		E9FAFE50229D968B0073F508 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		E9FAFE53229DA0E40073F508 /* StationDetailModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,9 +110,10 @@
 			isa = PBXGroup;
 			children = (
 				D2E470EA229583EC00752B98 /* AppDelegate.swift */,
-				D2E470EC229583EC00752B98 /* MapViewController.swift */,
 				E9FAFE45229734AC0073F508 /* RefreshButton.swift */,
+				E9FAFE53229DA0E40073F508 /* StationDetailModalView.swift */,
 				E9FAFE50229D968B0073F508 /* MainMenuViewController.swift */,
+				D2E470EC229583EC00752B98 /* MapViewController.swift */,
 				E9FAFE4F229D968B0073F508 /* PlansViewController.swift */,
 				E9FAFE4B22984DEA0073F508 /* PlansCell.swift */,
 				E9FAFE3A2296F9060073F508 /* FavoritesViewController.swift */,
@@ -254,6 +257,7 @@
 				E9FAFE42229734690073F508 /* Json.swift in Sources */,
 				E9FAFE392296F8E80073F508 /* FavoritesCell.swift in Sources */,
 				E9FAFE3B2296F9060073F508 /* FavoritesViewController.swift in Sources */,
+				E9FAFE54229DA0E40073F508 /* StationDetailModalView.swift in Sources */,
 				E9FAFE3D2297197A0073F508 /* FavoritesDetailController.swift in Sources */,
 				E9FAFE52229D968B0073F508 /* MainMenuViewController.swift in Sources */,
 				D2E470ED229583EC00752B98 /* MapViewController.swift in Sources */,

@@ -47,7 +47,6 @@ class StationManager: NSObject {
       do {
         let decoderJSON = JSONDecoder()
         let info = try decoderJSON.decode(Json.self, from: data)
-        print(info)
         let data = info.data
         let stations = data.stations
         
@@ -61,8 +60,8 @@ class StationManager: NSObject {
           
         }
         
-        for i in arrayStations {
-          print(i.name)
+        for _ in arrayStations {
+//          print(i.name)
         }
         DispatchQueue.main.async {
           completion(arrayStations)
