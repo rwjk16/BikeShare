@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SVProgressHUD
 
 class MapViewController: UIViewController, CLLocationManagerDelegate{
   
@@ -82,6 +83,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
     stationDetailView.isHidden = true
     stationDetailView.backgroundColor = .white
     self.view.addSubview(stationDetailView)
+    stationDetailView.favoriteButton.addTarget(self, action: #selector(handleFav), for: .touchUpInside)
     
     NSLayoutConstraint.activate([
       stationDetailView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
@@ -193,27 +195,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate{
   @objc func handleTap(){
     stationDetailView.isHidden = true
   }
-}
-
-extension MapViewController:MKMapViewDelegate{
-  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+  
+  @objc func handleFav(){
+    SVProgressHUD.show(withStatus: "Saving Fav")
     
-    let bikesText = NSMutableAttributedString(string: "1", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
-    bikesText.append(NSAttributedString(string: "\nBikes", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
-    
-    let docksText = NSMutableAttributedString(string: "2", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
-    docksText.append(NSAttributedString(string: "\nDocks", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
-    
-    if let annotation = view.annotation as? Station{
-      self.stationDetailView.numOfBikesLabel.attributedText = bikesText
-      self.stationDetailView.numOfDocksLabel.attributedText = docksText
-      self.stationDetailView.stationNameLabel.text = annotation.name
+    Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (nil) in
+      SVProgressHUD.dismiss()
     }
-    
-    UIView.transition(with: stationDetailView, duration: 0.3, options: .transitionCrossDissolve, animations: {
-      self.stationDetailView.isHidden = false
-    }, completion: nil)
   }
+}
+  
+  extension MapViewController:MKMapViewDelegate{
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+      
+      let bikesText = NSMutableAttributedString(string: "1", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
+      bikesText.append(NSAttributedString(string: "\nBikes", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
+      
+      let docksText = NSMutableAttributedString(string: "2", attributes: [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 35)])
+      docksText.append(NSAttributedString(string: "\nDocks", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12), NSAttributedString.Key.foregroundColor : UIColor.lightGray]))
+      
+      if let annotation = view.annotation as? Station{
+        self.stationDetailView.numOfBikesLabel.attributedText = bikesText
+        self.stationDetailView.numOfDocksLabel.attributedText = docksText
+        self.stationDetailView.stationNameLabel.text = annotation.name
+      }
+      
+      UIView.transition(with: stationDetailView, duration: 0.3, options: .transitionCrossDissolve, animations: {
+        self.stationDetailView.isHidden = false
+      }, completion: nil)
+    }
 }
 
 

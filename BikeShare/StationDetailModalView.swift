@@ -53,7 +53,6 @@ class StationDetailModalView: UIView {
   let favoriteButton: UIButton = {
     let button = UIButton()
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.addTarget(self, action: #selector(handleFav), for: .touchUpInside)
     button.setTitle("fav", for: .normal)
     button.backgroundColor = .yellow
     button.clipsToBounds = true
@@ -105,10 +104,6 @@ class StationDetailModalView: UIView {
       favoriteButton.widthAnchor.constraint(equalToConstant: 40),
       ])
   
-  }
-  
-  @objc func handleFav(){
-    print("save to fav")
   }
   
   required init?(coder aDecoder: NSCoder) {
