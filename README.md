@@ -1,3 +1,3 @@
 # BikeShare
 
-<img src="bikeShare.gif" max-width="50%" max-height="50%"/>
+<img src="bikeShare.gif" width="414px" height="896px"/>
